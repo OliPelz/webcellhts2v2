@@ -1,5 +1,5 @@
-angular.module('wizard-sample', ['mgo-angular-wizard'])
-    .controller('WizardCtrl', function($scope, WizardHandler) {
+var myAppModule = angular.module('app', []);
+myAppModule.controller('WizardCtrl',function($scope, WizardHandler) {
         $scope.finished = function() {
             alert("Wizard finished :)");
         }
@@ -11,4 +11,7 @@ angular.module('wizard-sample', ['mgo-angular-wizard'])
         $scope.goBack = function() {
             WizardHandler.wizard().goTo(0);
         }
-    });
+    }
+
+
+);

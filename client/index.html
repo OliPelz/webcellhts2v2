@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html data-ng-app="app">
 <head>
     <title>web CellHTS2 v2</title>
 
@@ -48,15 +48,10 @@
 
 <!-- end of navbar-->
 
-<!-- a container for alerts -->
-
-<div id="form_errors" class="alert alert-danger fade in" style="display:none"></div>
-
-
 <!-- wizard -->
 <!-- MAIN CONTENT -->
 <div id="main_content_wrap" class="outer">
-    <section id="main_content" class="inner main-inner" ng-app="wizard-sample" ng-controller="WizardCtrl">
+    <section id="main_content" class="inner main-inner" ng-controller="WizardCtrl">
         <wizard on-finish="finished()">
             <step title="Start">
                 <h1>Start</h1>
@@ -98,15 +93,16 @@
 <!-- end of wizard-->
 
 <!-- Bootstrap jQuery Plugins, compiled and minified -->
-<script src="js/jquery-1.11.0.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/angular.1.2.11.min.js"></script>
-<script src="js/lodash.js"></script>
-<script src="js/angular-wizard.js"></script>
-<script src="js/angular-strap.min.js"></script>
-<script src="js/angular-strap.tpl.min.js"></script>
-<script src="js/helpers.js"></script>
-<script src="js/wizard.js"></script>
+<script src="js/includes/jquery-1.11.0.min.js"></script>
+<script src="js/includes/bootstrap.min.js"></script>
+<script src="js/includes/angular.1.2.11.min.js"></script>
+<script src="js/includes/lodash.js"></script>
+<script src="js/includes/angular-wizard.js"></script>
+<script src="js/includes/angular-strap.min.js"></script>
+<script src="js/includes/angular-strap.tpl.min.js"></script>
+
+<script src="js/app.js"></script>
+<script src="js/controllers/wizardCtrl.js"></script>
 
 </body>
 </html>
