@@ -6,27 +6,20 @@
     <!-- Styles -->
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/angular-wizard.css" rel="stylesheet">
+	<link href="css/toastr.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <!-- navbar -->
 
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">Home</a>
-        </div>
-
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
             <ul class="nav navbar-nav">
+                <li class="active">
+					<a href="#">Home</a>
+				</li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">File<b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -34,13 +27,26 @@
                         <li><a href="#">Save</a></li>
                         <li><a href="#">Restart</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
+                        <li><a href="#">Generate R script</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">One more separated link</a></li>
+                        <li><a href="#">bla</a></li>
                     </ul>
                 </li>
-                <li class="active"><a href="#">Link</a></li>
-                <li><a href="#">Link</a></li>
+                <li class="active">
+					<a href="#">Configuration</a>
+				</li>
+				<li>
+                	<a href="#">Info</a>
+				</li>
+				<li>
+            		<a href="#">Manual</a>
+				</li>
+				<li>
+        			<a href="#">Tutorial</a>
+				</li>
+				<li>
+    				<a href="#">Downloads</a>
+				</li>
             </ul>
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -51,20 +57,63 @@
 <!-- wizard -->
 <!-- MAIN CONTENT -->
 <div id="main_content_wrap" class="outer">
-    <section id="main_content" class="inner main-inner" ng-controller="WizardCtrl">
+    <section id="main_content" class="inner main-inner" data-ng-controller="WizardCtrl">
         <wizard on-finish="finished()">
             <step title="Start">
-                <h1>Start</h1>
-                <p>Hey guys, welcome to the wizard :). If you want to check out the documentation on how to use it, <a href="https://github.com/mgonto/angular-wizard/blob/master/README.md">please click here.</a></p>
-                <p>Otherwise, let's continue with the wizard. Please <a href="" wz-next>click here to continue</a></p>
-                <input type="submit" wz-next value="Or click here"/>
-            </step>
-            <step title="Liking it">
-                <h1>Liking it</h1>
-                <p>You're now in the second step of this wizard.</p>
-                <p>Magic things can happen here.</p>
+				<h3>Introduction</h3>
+				web cellHTS2 is a front end for cellHTS2 for an end-to-end analysis of cell-based high-throughput
+				screening experiments.
+				The online version allows to analyse single and dual channel experiments using all features of cellHTS2.
+				web cellHTS2 guides the user through all analysis options and outputs a HTML including a full quality
+				control report and a ranked hitlist.
+				A downloadable package for local installation can be found 
+				<a target="_blank" href="http://www.dkfz.de/signaling/cellHTS/web-project/binary.html">here</a>.
+				<br><br>
+				cellHTS2 is a software package implemented in Bioconductor/R for cell-based high-throughput RNAi
+				screens.
+				The cellHTS2 package is an updated version of the cellHTS package,
+				offering a broader set of normalization functionality and the integration of multi-channel screens.
+				<br>
+				A set of example files can be downloaded from the online tutorial 
+				<a target="_parent" href="http://rnai-screening-wiki.dkfz.de/signaling/wiki/display/rnaiwiki/web+cellHTS2+quickstart+guide">here</a>. Additional sample files can also be found in the latest cellHTS2 source package (in source folder: inst) <a target="_parent" href="http://www.bioconductor.org/packages/devel/bioc/html/cellHTS2.html">here</a>.
+				<br>
+                <br><br><b>Start of a web cellHTS2 session</b><br><br><!-- we use these divs to enable/disable content -->
+				Load previous session or start a new session (download example session <a target="_parent" href="http://www.dkfz.de/signaling/cellHTS/web-project/binary/JOB33761_PERSISTENT">
+				link</a>)
+				<br>
+				(For more information click <a target="_blank" href="http://rnai-screening-wiki.dkfz.de/signaling/wiki/display/rnaiwiki/web+cellHTS2+Manual#webcellHTS2Manual-step1">here</a>)
+				<span id="tooltip1">
+					<input id="sessionFileUploadInput" name="sessionFileUploadInput" type="file"> 
+				</span>
+				<b>Step 1:</b> Select type of experiment<br/>
+				<select id="channel" name="channel" data-ng-model="stepStart.channel">
+					<option selected="selected" value="">please select</option>
+					<option value="single_channel">Single Channel</option>
+					<option value="dual_channel">Dual Channel</option>
+				</select>
+				<input type="button" data-ng-click="validateStepStart()" value="Click here to continue"/>
+			</step>
+            
+			<step title="Plate Configuration">
+				<b>Step 2:</b> Upload and assign data files to channels and replicates (
+				<a target="_blank" 					href="http://rnai-screening-wiki.dkfz.de/signaling/wiki/display/rnaiwiki/web+cellHTS2+Manual#webcellHTS2Manual-uploaddatafiles">
+					help
+				</a>).
+				<br>
+				<p>Data Files can be uploaded as raw plate reader, text files in cellHTS2 format or ZIP archives (recommended). </p>
+				<p>Alternatively, the
+				Advanced FileImporter module can be used for more complex file types (<a href="http://rnai-screening-wiki.dkfz.de/signaling/wiki/display/rnaiwiki/AdvancedFileImporterManual">help</a>).
+				</p>
+				<a href="#advancedFileImporter">
+					Advanced File Importer
+				</a>
+				<div data-ng-view></div>
+				<input id="dataFileUploadInput" name="dataFileUploadInput" type="file">
+				Filename Parsing:
+				<input checked="checked" id="inplacecheckbox" type="checkbox">
                 <input type="button" wz-next="logStep()" value="Click here to continue" />
             </step>
+			
             <step title="More steps">
                 <h1>More steps</h1>
                 <p>Click on the bottom navigation on Liking it to go back to that step for example</p>
@@ -93,16 +142,26 @@
 <!-- end of wizard-->
 
 <!-- Bootstrap jQuery Plugins, compiled and minified -->
+
 <script src="js/includes/jquery-1.11.0.min.js"></script>
-<script src="js/includes/bootstrap.min.js"></script>
-<script src="js/includes/angular.1.2.11.min.js"></script>
+<script src="js/includes/angular.1.2.13.min.js"></script>
 <script src="js/includes/lodash.js"></script>
 <script src="js/includes/angular-wizard.js"></script>
-<script src="js/includes/angular-strap.min.js"></script>
-<script src="js/includes/angular-strap.tpl.min.js"></script>
+<script src="js/includes/angular-route.min.js"></script>
+<script src="js/includes/toastr.min.js"></script>
 
-<script src="js/app.js"></script>
+<script src="js/config.js"></script>
+
+<script src="js/systemchecks.js"></script>
+
+<script src="js/routes.js"></script>
+
+<!-- import controllers -->
 <script src="js/controllers/wizardCtrl.js"></script>
+<script src="js/controllers/advancedFileImporter.js"></script>
+
+
+
 
 </body>
 </html>
