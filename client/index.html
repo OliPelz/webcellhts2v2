@@ -4,14 +4,14 @@
     <title>web CellHTS2 v2</title>
 
     <!-- Styles -->
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/angular-wizard.css" rel="stylesheet">
 	<link href="css/toastr.min.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <!-- navbar -->
 
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default" role="navigation" data-ng-controller="NavBarCtrl">
     <div class="container-fluid">
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -32,8 +32,8 @@
                         <li><a href="#">bla</a></li>
                     </ul>
                 </li>
-                <li class="active">
-					<a href="#">Configuration</a>
+                <li>
+					<a href="#"  data-ng-click="openConfigModal()" >Configuration</a>
 				</li>
 				<li>
                 	<a href="#">Info</a>
@@ -56,6 +56,7 @@
 
 <!-- wizard -->
 <!-- MAIN CONTENT -->
+
 <div id="main_content_wrap" class="outer">
     <section id="main_content" class="inner main-inner" data-ng-controller="WizardCtrl">
         <wizard on-finish="finished()">
@@ -107,7 +108,6 @@
 				<a href="#advancedFileImporter">
 					Advanced File Importer
 				</a>
-				<div data-ng-view></div>
 				<input id="dataFileUploadInput" name="dataFileUploadInput" type="file">
 				Filename Parsing:
 				<input checked="checked" id="inplacecheckbox" type="checkbox">
@@ -145,20 +145,24 @@
 
 <script src="js/includes/jquery-1.11.0.min.js"></script>
 <script src="js/includes/angular.1.2.13.min.js"></script>
+<script src="js/includes/ui-bootstrap-tpls-0.10.0.min.js"></script>
 <script src="js/includes/lodash.js"></script>
 <script src="js/includes/angular-wizard.js"></script>
-<script src="js/includes/angular-route.min.js"></script>
+<!--<script src="js/includes/angular-route.min.js"></script>-->
 <script src="js/includes/toastr.min.js"></script>
 
 <script src="js/config.js"></script>
 
 <script src="js/systemchecks.js"></script>
 
-<script src="js/routes.js"></script>
+<!--<script src="js/routes.js"></script>-->
 
 <!-- import controllers -->
 <script src="js/controllers/wizardCtrl.js"></script>
 <script src="js/controllers/advancedFileImporter.js"></script>
+<script src="js/controllers/programSettings.js"></script>
+
+<script src="js/controllers/navBarCtrl.js"></script>
 
 
 

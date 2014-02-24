@@ -1,6 +1,7 @@
 ﻿var myAppModule = angular.module('app', [
-	'ngRoute',
-	'mgo-angular-wizard'
+	/*'ngRoute',*/
+	'mgo-angular-wizard',
+	'ui.bootstrap'
 	]);
 
 'use strict';
