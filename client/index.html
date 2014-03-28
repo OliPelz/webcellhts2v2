@@ -27,7 +27,8 @@
                         <li><a href="#">Save</a></li>
                         <li><a href="#">Restart</a></li>
                         <li class="divider"></li>
-                        <li><a href="#">Generate R script</a></li>
+                        <li><a href="#" data-ng-click="showCurrentRScript()">Show current R script</a></li>
+						<li><a href="#">Generate R script</a></li>
                         <li class="divider"></li>
                         <li><a href="#">bla</a></li>
                     </ul>
@@ -87,12 +88,18 @@
 					<input id="sessionFileUploadInput" name="sessionFileUploadInput" type="file"> 
 				</span>
 				<b>Step 1:</b> Select type of experiment<br/>
-				<select id="channel" name="channel" data-ng-model="stepStart.channel">
+				<select id="channel" name="channel" data-ng-model="stepStart.channel" data-ng-change="stepStartChangeChannel()">
 					<option selected="selected" value="">please select</option>
 					<option value="single_channel">Single Channel</option>
 					<option value="dual_channel">Dual Channel</option>
 				</select>
+				<div data-ng-show="stepStart.showChannelDesc">	
+					<input type="text" data-ng-model="stepStart.channel1Name" />
+					<input type="text" data-ng-model="stepStart.channel2Name" />
+				</div>
+				<p>	
 				<input type="button" data-ng-click="validateStepStart()" value="Click here to continue"/>
+				</p>
 			</step>
             
 			<step title="Plate Configuration">
@@ -133,7 +140,7 @@
                 <h1>Finish him</h1>
                 <p>Finally this ends!</p>
                 <input type="button" wz-next value="Click here to end" />
-                <input type="button" ng-click="goBack()" value="Click here to start again" />
+                <input type="button" data-ng-click="goBack()" value="Click here to start again" />
             </step>
         </wizard>
     </section>
@@ -148,21 +155,34 @@
 <script src="js/includes/ui-bootstrap-tpls-0.10.0.min.js"></script>
 <script src="js/includes/lodash.js"></script>
 <script src="js/includes/angular-wizard.js"></script>
+<script src="js/includes/sprintf.min.js"></script>
+
 <!--<script src="js/includes/angular-route.min.js"></script>-->
 <script src="js/includes/toastr.min.js"></script>
 
 <script src="js/config.js"></script>
 
-<script src="js/systemchecks.js"></script>
+<script src="js/retrieveServerInfo.js"></script>
 
 <!--<script src="js/routes.js"></script>-->
+
+<!-- import services-->
+<script src="js/services/sharedDataService.js"></script>
+
 
 <!-- import controllers -->
 <script src="js/controllers/wizardCtrl.js"></script>
 <script src="js/controllers/advancedFileImporter.js"></script>
 <script src="js/controllers/programSettings.js"></script>
-
+    
 <script src="js/controllers/navBarCtrl.js"></script>
+<!-- load cellhts2 config files -->
+<!-- todo: this will be moved to  ONE js file which will load the other ones -->
+<script src="js/cellHTS2Version/2.10.js"></script>
+<script src="js/cellHTS2Version/2.16.js"></script>
+
+<script src="js/cellHTS2Version/current.js"></script>
+<script src="js/cellHTS2Version/scriptOutput.js"></script>
 
 
 
