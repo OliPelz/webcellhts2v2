@@ -1,6 +1,6 @@
 function ScriptOutput(config) {	
 	this.config = config;
-    this.sortedKeys = (jQuery.map(currentVersion,  function (element, index){
+    this.sortedKeys = (jQuery.map(global_CELLHTS2Version,  function (element, index){
             return index
     })).sort(); //keys to array
     
@@ -10,11 +10,12 @@ function ScriptOutput(config) {
 		for(var i = 0; i < this.sortedKeys.length; i++) {
 			output += this.generateStep(this.sortedKeys[i]);
 		}
+		return output;
 	}
 	ScriptOutput.prototype.generateStep = function(stepId) {
 		var output = "";
         
-        var step = currentVersion[stepId];
+        var step = global_CELLHTS2Version[stepId];
        
         //if we dont have any dependencies
         if(step.dependentVariables == null) {

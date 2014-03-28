@@ -4,10 +4,10 @@
 *
 */
 
-var script216 = {};
+var global_script216 = {};
 
 
-script216["0"] = {
+global_script216["0"] = {
 		preLine : "# cellHTS2 header\n#\n#\n",
 		command : "#script generated on %s\n"+
                   "#target R version %s\n"+
@@ -22,13 +22,13 @@ script216["0"] = {
                               ],
 		
 };
-script216["1"] = {
+global_script216["1"] = {
 		preLine : "# piping output to file\n",
 		command : "#TODO",  // this is a sprintf string 
-		dependentVariables : null,
+		dependentVariables : [],
 		
 };
-script216["2"] = {
+global_script216["2"] = {
 		preLine : null,
 		command : "singleChannel=%s",  // this is a sprintf string 
 		dependentVariables : ["dictkey_singleChannel"],

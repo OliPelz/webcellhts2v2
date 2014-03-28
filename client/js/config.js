@@ -10,6 +10,7 @@ var myAppModule = angular.module('app', [
 
 var cellHTS2Config = {};
 
+
 cellHTS2Config.webcellHTS2Version = "2.00";
 
 cellHTS2Config.no_webserver = true; //if true than we dont have any webserver and no R
@@ -45,6 +46,26 @@ toastr.options = {
 	"showMethod": "fadeIn",
 	"hideMethod": "fadeOut"
 }
+
+
+
+/*
+*  define a service to be able to share webcellhts2 config data between controllers
+*/
+myAppModule.service('sharedWebCellHTS2Props', function() {
+    var sharedObject = {};
+    var configObject = cellHTS2Config;
+	
+    
+     this.getSharedObject = function() {
+         return sharedObject;
+     }
+     this.getConfigObject = function() {
+	     return configObject;
+     }
+    
+});
+
 
 
 
