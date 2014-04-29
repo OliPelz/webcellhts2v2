@@ -7,6 +7,6 @@ var global_cellHTS2Script = {
 };
 
 //point to the script you want to use
-var global_CELLHTS2Version = global_cellHTS2Script["2.1.6"]; 
+var global_currentCELLHTS2Version = global_cellHTS2Script["2.1.6"]; 
 	
 

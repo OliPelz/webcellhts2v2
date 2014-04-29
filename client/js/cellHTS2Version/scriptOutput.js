@@ -1,25 +1,29 @@
 function ScriptOutput(config) {	
 	this.config = config;
-    this.sortedKeys = (jQuery.map(global_CELLHTS2Version,  function (element, index){
+	this.currentScript = global_currentCELLHTS2Version;
+    /*this.sortedKeys = (jQuery.map(global_CELLHTS2Version,  function (element, index){
             return index
-    })).sort(); //keys to array
+    })).sort(); //keys to array*/
     
 	ScriptOutput.prototype.generateScript = function() {
         //sort the keys by number!
 		var output = "";
-		for(var i = 0; i < this.sortedKeys.length; i++) {
-			output += this.generateStep(this.sortedKeys[i]);
+		for(var i = 0; i < this.currentScript.length; i++) {
+			output += this.generateStep(this.currentScript[i]);
 		}
 		return output;
 	}
-	ScriptOutput.prototype.generateStep = function(stepId) {
+	ScriptOutput.prototype.generateStep = function(step) {
+		
 		var output = "";
-        
-        var step = global_CELLHTS2Version[stepId];
-       
+               
         //if we dont have any dependencies
         if(step.dependentVariables == null) {
-            output+=step.preLine+step.command;
+			var stepWeigth = "";
+			if(step.weightForStep > 0) {
+				stepWeight = "#stepweight:"+step.weightForStep+"\n";
+			}
+            output+=step.preLine+stepWeight+step.command;
         }
         var foundCount = 0;
         var printValues = [];
