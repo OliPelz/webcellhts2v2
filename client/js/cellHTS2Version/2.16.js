@@ -3,22 +3,34 @@
 *
 *
 */
-var global_script216 = [
+
+// setup namespace if not already defined
+if(!de) {
+	var de = {};
+}
+if(!de.dkfz)
+    de.dkfz = {};
+if(!de.dkfz.signaling)
+    de.dkfz.signaling = {};
+if(!de.dkfz.signaling.webcellhts2v2)
+    de.dkfz.signaling.webcellhts2v2 = {};   
+
+de.dkfz.signaling.webcellhts2v2.script216 = [
 		{
 		type: "SPRINTF",
-		comment:  "# cellHTS2 header\n#\n#\n",
+		comment:  "#cellHTS2 header\n#\n#\n",
 		command : "#script generated on %s\n"+
                   "#target R version %s\n"+
                   "#target webcellhts2v2 version %s\n"+
                   "#current R version %s\n"+
                   "#current cellHTS2 version %s\n#\n\n",// this is a sprintf string
-		dependentVariables : ["currentDate",
-                              "dependentCellHTS2Version",
-                              "dependentRVersion",
-                              "currentRversion",
-                              "currenCellHTS2Version"
+		dependentVariables : ["function.currentTimestamp",
+                              "userInput.dependentCellHTS2Version",
+                              "userInput.dependentRVersion",
+                              "userInput.currentRversion",
+                              "userInput.currenCellHTS2Version"
                               ],
-		conditionDependentVariables : ["VARS_DEFINED"],					  					  
+		conditionDependentVariables : "VARS_DEFINED",					  					  
 		weightForProgressbar : 0	
 		},
 		{
@@ -47,12 +59,14 @@ var global_script216 = [
 					"SummaryMethod='%s'"+
 					"Screenlog='Screenlog.txt'"+
 					"Score='%s'",
-		dependentVariables : [],
-		conditionDependentVariables : ["VARS_DEFINED"],					  					  
+		dependentVariables : ["function.name",
+								"function.reportDir",
+								""
+		],
 		weightForProgressbar : 0
 	},
 	{
-		TYPE : "PLAINTEXT",
+		TYPE : "WORSCHD",
 		command : "library(cellHTS2)",  
 		weightForProgressbar : 0
 	},
