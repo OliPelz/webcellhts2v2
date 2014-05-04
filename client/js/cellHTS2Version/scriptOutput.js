@@ -2,19 +2,25 @@
 function ScriptOutput(userInput) {	
 	
 	//private hash we will use in this class
+	//contains all the functions we need in the script
 	var _myFcts = {
 		"currentTimestamp" : function() {
 			return formatted_date_and_time();
 		}
 	}
-	
-	if(de.dkfz.signaling.webcellhts2v2.cellHTS2Config == null) {
+	var myNamespace = de.dkfz.signaling.webcellhts2v2;
+	if(myNamespace.cellHTS2Config == null) {
 		throw "ScriptOutput() : no global config cellHTS2Config obj defined";
 		return null;
 	}
+	if(myNamespace.currentCELLHTS2ScriptVersion == null) {
+		throw "ScriptOutput() : no global config currentCELLHTS2Script obj defined";
+		return null;
+	}
 	this.userInput = userInput;
-	this.cellHTS2Config = de.dkfz.signaling.webcellhts2v2.cellHTS2Config;
-    /*this.sortedKeys = (jQuery.map(global_CELLHTS2Version,  function (element, index){
+	this.cellHTS2Config = myNamespace.cellHTS2Config;
+    this.currentCELLHTS2Script = myNamespace.global_cellHTS2Script[myNamespace.currentCELLHTS2ScriptVersion];
+	/*this.sortedKeys = (jQuery.map(global_CELLHTS2Version,  function (element, index){
             return index
     })).sort(); //keys to array*/
     ScriptOutput.prototype.setDefinedVariables = function(definedVariables) {
@@ -24,8 +30,8 @@ function ScriptOutput(userInput) {
 	ScriptOutput.prototype.generateScript = function() {
         //sort the keys by number!
 		var output = "";
-		for(var i = 0; i < this.currentScript.length; i++) {
-			var stepOutput = this.generateStep(this.currentScript[i]);
+		for(var i = 0; i < this.currentCELLHTS2Script.length; i++) {
+			var stepOutput = this.generateStep(this.currentCELLHTS2Script[i]);
 			if(stepOutput == undefined) {
 				return output;
 			}

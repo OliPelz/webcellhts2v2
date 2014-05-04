@@ -15,7 +15,7 @@ if(!de.dkfz.signaling.webcellhts2v2)
 //applying the module pattern
 de.dkfz.signaling.webcellhts2v2.cellHTS2Config = function() {
 	var my = {};
-	my.webcellHTS2Version = "2.00";
+	my.webcellHTS2v2Version = "0.01";
 
 	my.testing = true; //if true than we dont have any webserver and no R
                               //basically this is for testing the client and
@@ -38,7 +38,6 @@ de.dkfz.signaling.webcellhts2v2.cellHTS2Config = function() {
 		}
 	};
 // generate cellHTS2 scripts for the following version
-	my.dependentCellHTS2Version = "2.16.0";
 	my.dependentRVersion = "2.13.1";
 
 	my.currentCellHTS2Version = null;

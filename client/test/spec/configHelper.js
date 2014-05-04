@@ -18,7 +18,7 @@ describe("cellHTS2Config testsuite", function() {
 	describe("cellHTS2Config", function() {
 		it("should have a webcellhTS2Version defined",
 			 function(){
-			expect(cellHTS2Config.webcellHTS2Version).toBeDefined();
+			expect(cellHTS2Config.webcellHTS2v2Version).toBeDefined();
 		});
 		it("should have a boolean testing variable",
 			 function(){

@@ -12,10 +12,12 @@
 //define new test context, this creates a new test suite
 describe("scriptOuput testsuite", function() {
 	var scriptOutput;
-	var cellHTS2Config = de.dkfz.signaling.webcellhts2v2.cellHTS2Config;
+	var webcellhts2v2 = de.dkfz.signaling.webcellhts2v2;
+	var cellHTS2Config = webcellhts2v2.cellHTS2Config;
 	//this is needed for our testing
 	cellHTS2Config.testing = true;
-	cellHTS2Config.currentCellHTS2Version = "2.16";
+	//this test-suite depends on version
+	webcellhts2v2.currentCELLHTS2ScriptVersion = "2.16.0";
 	
 	beforeEach(function() {
 		jasmine.addMatchers(CustomMatchers);
