@@ -8,6 +8,7 @@ new version of webcellhts2 (v2) using more modern client technologies:
 * R-Node (using node.js technology)
 
 unique features
+* switching stylesheets dynamically
 * heavily relying client side javascript, emphasis on doing most of the webapp clientside
 * emphasis on usability
 * the complete R script generation and workflow can be made in the browser
@@ -15,5 +16,6 @@ unique features
 * a unique configuration language has been written to easily modify/extend the R-scripts
 * workflows can be generated on the fly in the web browser
 * hight code testing coverage
+
 
 Read INSTALL.md for information to setting it up and installing it.

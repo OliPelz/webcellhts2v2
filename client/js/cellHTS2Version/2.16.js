@@ -34,12 +34,7 @@ de.dkfz.signaling.webcellhts2v2.script216 = [
 		},
 		{
 		type : "PLAINTEXT",
-		command :  "# defining some important variables\n"
-				  +"and redirecting output"
-				  +"orgDir=getwd()\n"
-				  +"outDir=results\n"
-				  +"stdOut=R_OUTPUT.TXT\n"
-				  +"rScriptOut=R_OUTPUT.SCRIPT\n"
+		command :  "# redirecting program output to a file\n"
 				  +"zz <- file('R_OUTPUT.TXT', open=\"w\")\n"
 				  +"sink(file=zz,type=\"message\" )\n",
 		dependentOnUserInputVariables : ["name"], //can be defined but most not be		  
@@ -47,21 +42,23 @@ de.dkfz.signaling.webcellhts2v2.script216 = [
 		},
 	{
 		TYPE : 	    "SPRINTF",
-		command : 	"Name='%s'"+
-					"Outdir_report='%s'"+
-					"LogTransform=FALSE"+
-					"PlateList='Platelist.txt'"+
-					"Plateconf='PlateConfig.txt'"+
-					"Description='Description.txt'"+
+		command : 	"Title='%s'"+
+					"Jobdir='%s'"+                               /*this will be the full path to the output job dir*/
+					"Outdir_report='%s'"+                        /*this will be a subdir for the current run */
+					"LogTransform='%s'"+
+					"PlateList='%s'"+
+					"Plateconf='%s'"+
+					"Description='%s'"+
 					"NormalizationMethod='%s'"+
 					"NormalizationScaling='%s'"+
 					"VarianceAdjust='%s'"+
 					"SummaryMethod='%s'"+
-					"Screenlog='Screenlog.txt'"+
+					"Screenlog='%s'"+
 					"Score='%s'",
-		dependentVariables : ["userInput.name or 'n.a.'",
-								"function.reportDir",
-								""
+		dependentVariables : ["userInput.title || 'n.a.'",
+							  "function.jobDir",
+							  "function.reportDir",
+							  ""
 		],
 		weightForProgressbar : 0
 	},

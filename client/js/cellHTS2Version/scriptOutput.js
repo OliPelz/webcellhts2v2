@@ -1,13 +1,7 @@
 //userInput = all the variables defined from the user through the web interface (html forms) for example dualChannel, varianceAdjust etc.
 function ScriptOutput(userInput) {	
 	
-	//private hash we will use in this class
-	//contains all the functions we need in the script
-	var _myFcts = {
-		"currentTimestamp" : function() {
-			return formatted_date_and_time();
-		}
-	}
+	
 	var myNamespace = de.dkfz.signaling.webcellhts2v2;
 	if(myNamespace.cellHTS2Config == null) {
 		throw "ScriptOutput() : no global config cellHTS2Config obj defined";
@@ -56,12 +50,25 @@ function ScriptOutput(userInput) {
 					sprintVars.push(functOut());
 				}
 				else if(type == "userInput") {
+					// if one has defined an alternative using '||'
+					var res = myVar.exec(/(.+)\s*\|\|\s*(.+)$/);
+
+					var myUserInput = this.userInput[myVar];
+					
+					if(res != null && res.length > 0) {
+						var firstAttemp = res[1];
+						var secAttemp = res[2];
+						if(this.userInput[firstAttemp] == undefined) {
+							myUserInput = secAttemp;
+						}
+					}
+					
 					// if the user has not supplied the variable of interest
-					if(this.userInput[myVar] == undefined) {
+					if(myUserInput == undefined) {
 						allDefined = false;
 						break;
-					}
-					sprintVars.push(this.userInput[myVar]);
+					}					
+					sprintVars.push(myUserInput);
 				}
 			}
 			if(!allDefined) {
@@ -88,4 +95,23 @@ function ScriptOutput(userInput) {
     ScriptOutput.prototype.callFunction = function(myFctName) {
 		return _myFcts[myFctName];
     }
+	
+	//private hash we will use in this class
+	//contains all the functions we need in the script
+	var _myFcts = {
+		"currentTimestamp" : function() {
+			return formatted_date_and_time();
+		},
+		"jobDir" : function() {
+			//if we are on a test environment we generate a full path to a job directory
+			
+			//else if we are using a real webserver get a full path to a free JOB dir using AJAX
+		},
+		"reportDir" : function() {
+			//if we are on a test environment we generate the output folder by generating current timestamp
+			
+			//else if we are using a real webserver get the next free directory (using AJAX) name using a proper mkdir function and return it here 
+			
+		}
+	}
 }
