@@ -20,8 +20,8 @@ de.dkfz.signaling.webcellhts2v2.script216 = [
 		type: "SPRINTF",
 		comment:  "#cellHTS2 header\n#\n#\n",
 		command : "#script generated on %s\n"+
+        		  "#target cellHTS2 version %s\n"+
                   "#target R version %s\n"+
-                  "#target webcellhts2v2 version %s\n"+
                   "#current R version %s\n"+
                   "#current cellHTS2 version %s\n#\n\n",// this is a sprintf string
 		dependentVariables : ["function.currentTimestamp",
@@ -30,7 +30,6 @@ de.dkfz.signaling.webcellhts2v2.script216 = [
                               "userInput.currentRversion",
                               "userInput.currenCellHTS2Version"
                               ],
-		conditionDependentVariables : "VARS_DEFINED",					  					  
 		weightForProgressbar : 0	
 		},
 		{
@@ -43,6 +42,7 @@ de.dkfz.signaling.webcellhts2v2.script216 = [
 				  +"rScriptOut=R_OUTPUT.SCRIPT\n"
 				  +"zz <- file('R_OUTPUT.TXT', open=\"w\")\n"
 				  +"sink(file=zz,type=\"message\" )\n",
+		dependentOnUserInputVariables : ["name"], //can be defined but most not be		  
 		weightForProgressbar : 0
 		},
 	{
@@ -59,7 +59,7 @@ de.dkfz.signaling.webcellhts2v2.script216 = [
 					"SummaryMethod='%s'"+
 					"Screenlog='Screenlog.txt'"+
 					"Score='%s'",
-		dependentVariables : ["function.name",
+		dependentVariables : ["userInput.name or 'n.a.'",
 								"function.reportDir",
 								""
 		],

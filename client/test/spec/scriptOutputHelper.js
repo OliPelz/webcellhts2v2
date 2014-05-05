@@ -30,8 +30,30 @@ describe("scriptOuput testsuite", function() {
 			expect(scriptOutput).toBeInstanceOf(ScriptOutput);
 		});
 		it("generate an empty script for no variables defined", function(){
-			scriptOutput.setDefinedVariables({});
 			expect(scriptOutput.generateScript()).toEqual("");
+		});
+		it("generate empty script header if the minimum variables for this step have NOT been defined", function() {
+			scriptOutput.setUserInput({
+				"dependentCellHTS2Version" : "1.2.3",
+				"dependentRVersion" : "4.5.6",
+				"currentRversion" : "7.8.9"
+			    //"currenCellHTS2Version" : "10.11.12"
+			});
+			expect(scriptOutput.generateScript()).toMatch("");	
+		});
+		it("generate script header if the minimum variables for this step has been defined", function() {
+			scriptOutput.setUserInput({
+				"dependentCellHTS2Version" : "1.2.3",
+				"dependentRVersion" : "4.5.6",
+				"currentRversion" : "7.8.9",
+			    "currenCellHTS2Version" : "10.11.12"
+			});
+			var currentDate = formatted_date(); //cannot compare to complete timestamp
+			expect(scriptOutput.generateScript()).toMatch("#script generated on "+currentDate);
+			expect(scriptOutput.generateScript()).toMatch("#target cellHTS2 version 1.2.3");
+			expect(scriptOutput.generateScript()).toMatch("#target R version 4.5.6");
+			expect(scriptOutput.generateScript()).toMatch("#current cellHTS2 version 10.11.12");
+	
 		});
 	});
 });

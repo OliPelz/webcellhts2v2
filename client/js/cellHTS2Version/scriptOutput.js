@@ -23,8 +23,8 @@ function ScriptOutput(userInput) {
 	/*this.sortedKeys = (jQuery.map(global_CELLHTS2Version,  function (element, index){
             return index
     })).sort(); //keys to array*/
-    ScriptOutput.prototype.setDefinedVariables = function(definedVariables) {
-    	this.variables = definedVariables;
+    ScriptOutput.prototype.setUserInput= function(userInput) {
+    	this.userInput = userInput;
     }
 	//this is the main function
 	ScriptOutput.prototype.generateScript = function() {
@@ -43,15 +43,17 @@ function ScriptOutput(userInput) {
 		
 		if(step.type == "SPRINTF") {
 			var allDefined = true;
+			var sprintVars = [];
 			for(var i = 0; i < step.dependentVariables.length; i++) {
-				var arr = step.dependentVariables[i];
+				var arr = step.dependentVariables[i].split("\.");
 				var type = arr[0], myVar = arr[1];
 				if(type == "function") {
-					var functOut = callFunction(myVar);
+					var functOut = this.callFunction(myVar);
 					if(functOut == undefined) {
 						allDefined = false;
 						break;
 					}
+					sprintVars.push(functOut());
 				}
 				else if(type == "userInput") {
 					// if the user has not supplied the variable of interest
@@ -59,14 +61,20 @@ function ScriptOutput(userInput) {
 						allDefined = false;
 						break;
 					}
+					sprintVars.push(this.userInput[myVar]);
 				}
 			}
 			if(!allDefined) {
 				return undefined;
 			}
-	        return step.comment+this.sprintf(step.command, step.dependentVariables);
+	        return step.comment+this.sprintf(step.command, sprintVars);
 		}
-		else if(step.type == "SPRINTF") {
+		else if(step.type == "PLAINTEXT") {
+			//if dependentVariables are defined we have to check
+			//if they are there otherwise just print it out
+			if(step.dependentOnUserInputVariables != undefined) {
+				
+			}
 			return step.command;
 		}   
 		return undefined;    
@@ -78,6 +86,6 @@ function ScriptOutput(userInput) {
 		return myString;
 	}
     ScriptOutput.prototype.callFunction = function(myFctName) {
-		return _myFct[myFctName];
+		return _myFcts[myFctName];
     }
 }
