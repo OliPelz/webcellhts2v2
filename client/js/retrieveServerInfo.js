@@ -2,6 +2,7 @@
 	//check dependencies to file system, config files etc
 	//check server if R is running etc
 	var failedChecks = false;
+	var cellHTS2Config = de.dkfz.signaling.webcellhts2v2.cellHTS2Config;
 	
     if(cellHTS2Config.testing) {
 		//if testing than we dont have a webserver 

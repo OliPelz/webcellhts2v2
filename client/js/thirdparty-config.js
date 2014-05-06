@@ -14,7 +14,7 @@ var myAppModule = angular.module('app', [
 */
 myAppModule.service('sharedWebCellHTS2Props', function() {
     var sharedObject = {};
-    var configObject = cellHTS2Config;
+    var configObject = de.dkfz.signaling.webcellhts2v2.cellHTS2Config;
 	
     
      this.getSharedObject = function() {

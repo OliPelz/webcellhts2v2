@@ -115,9 +115,13 @@
 				<a href="#advancedFileImporter">
 					Advanced File Importer
 				</a>
-				<input id="dataFileUploadInput" name="dataFileUploadInput" type="file">
+				<input id="dataFileUploadInput"
+				data-ng-model="stepUploadDF.dataFiles"
+				type="file"
+				data-ng-click="stepUploadDFUpload()"
+				>
 				Filename Parsing:
-				<input checked="checked" id="inplacecheckbox" type="checkbox">
+				<input checked="checked" id="inplacecheckbox" type="checkbox" 					data-ng-model="stepUploadDF.filenameParsing">
                 <input type="button" wz-next="logStep()" value="Click here to continue" />
             </step>
 			

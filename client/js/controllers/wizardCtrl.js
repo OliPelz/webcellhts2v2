@@ -6,6 +6,10 @@ myAppModule.controller('WizardCtrl',function($scope, WizardHandler, sharedWebCel
 						channel1Name : "Channel1",
 						channel2Name : "Channel2"
 						};
+	$scope.stepUploadDF = {                   //DF = datafiles
+							filenameParsing : true,
+							dataFiles : []
+						};
 	sharedWebCellHTS2Props.getSharedObject().stepStart = $scope.stepStart;
 	$scope.finished = function() {
 		alert("Wizard finished :)");
@@ -18,7 +22,7 @@ myAppModule.controller('WizardCtrl',function($scope, WizardHandler, sharedWebCel
 	$scope.goBack = function() {
 		WizardHandler.wizard().goTo(0);
 	}
-	
+	//first step methods
 	$scope.stepStartChangeChannel = function() {
 		if($scope.stepStart.channel == "dual_channel") {
 			$scope.stepStart.showChannelDesc = true;
@@ -26,6 +30,12 @@ myAppModule.controller('WizardCtrl',function($scope, WizardHandler, sharedWebCel
 		else {
 			$scope.stepStart.showChannelDesc = false;
 		}
+	}
+	
+	//second step methods  - stepUploadDF
+	$scope.stepUploadDFUpload = function() {
+		alert($scope.stepUploadDF.dataFiles);
+		//start the parsing , put in the shit
 	}
 	
 	// here are the step validators
