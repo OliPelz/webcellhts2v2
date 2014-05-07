@@ -8,6 +8,9 @@ new version of webcellhts2 (v2) using more modern client technologies:
 * R-Node (using node.js technology)
 
 unique features
+* modern design with easy-to-find menubar
+* more modern wizard control with navigation bar
+* beautiful dynamic error and warning messages
 * switching stylesheets dynamically
 * heavily relying client side javascript, emphasis on doing most of the webapp clientside
 * emphasis on usability

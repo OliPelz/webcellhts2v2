@@ -89,11 +89,12 @@
 				</span>
 				<b>Step 1:</b> Select type of experiment<br/>
 				<select id="channel" name="channel" data-ng-model="stepStart.channel" data-ng-change="stepStartChangeChannel()">
-					<option selected="selected" value="">please select</option>
+					<option selected="selected" value="">Select channels</option>
 					<option value="single_channel">Single Channel</option>
 					<option value="dual_channel">Dual Channel</option>
 				</select>
-				<div data-ng-show="stepStart.showChannelDesc">	
+				<div data-ng-show="stepStart.isDualChannel">	
+					Would you like to label your channels?
 					<input type="text" data-ng-model="stepStart.channel1Name" />
 					<input type="text" data-ng-model="stepStart.channel2Name" />
 				</div>
@@ -103,7 +104,7 @@
 			</step>
             
 			<step title="Plate Configuration">
-				<b>Step 2:</b> Upload and assign data files to channels and replicates (
+				<b>Step 2:</b> Upload and assign data files to channels and replicates (multiple upload allowed)
 				<a target="_blank" 					href="http://rnai-screening-wiki.dkfz.de/signaling/wiki/display/rnaiwiki/web+cellHTS2+Manual#webcellHTS2Manual-uploaddatafiles">
 					help
 				</a>).
@@ -115,13 +116,24 @@
 				<a href="#advancedFileImporter">
 					Advanced File Importer
 				</a>
-				<input id="dataFileUploadInput"
-				data-ng-model="stepUploadDF.dataFiles"
-				type="file"
-				data-ng-click="stepUploadDFUpload()"
-				>
+				<input type="file" data-ng-file-select="onDataFileUpload($files)" multiple>
+				<table data-ng-show="stepUploadDF.dataFiles">
+					<thead>
+						<tr>Filename</tr>
+						<tr>Channel</tr>
+						<tr data-ng-show="stepStart.isDualChannel">Replicate</tr>
+					<thead>
+					
+					<tbody>	
+					<tr data-ng-repeat="myDataFile in stepUploadDF.dataFiles">
+						<td>{{myDataFile.name}}</td>
+						<td>{{myDataFile.channel}}</td>			
+						<td data-ng-show="stepStart.isDualChannel">{{myDataFile.replicate}}</td>
+					</tr>
+					</tbody>
+				</table>	
 				Filename Parsing:
-				<input checked="checked" id="inplacecheckbox" type="checkbox" 					data-ng-model="stepUploadDF.filenameParsing">
+				<input type="checkbox" data-ng-model="stepUploadDF.filenameParsing">
                 <input type="button" wz-next="logStep()" value="Click here to continue" />
             </step>
 			
@@ -159,6 +171,7 @@
 <script src="js/includes/ui-bootstrap-tpls-0.10.0.min.js"></script>
 <script src="js/includes/lodash.js"></script>
 <script src="js/includes/angular-wizard.js"></script>
+<script src="js/includes/angular-file-upload.min.js"></script>
 <script src="js/includes/sprintf.min.js"></script>
 
 <!--<script src="js/includes/angular-route.min.js"></script>-->

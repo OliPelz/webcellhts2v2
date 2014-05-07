@@ -5,7 +5,8 @@
 var myAppModule = angular.module('app', [
 	/*'ngRoute',*/
 	'mgo-angular-wizard',
-	'ui.bootstrap'
+	'ui.bootstrap',
+	'angularFileUpload'
 ]);
 
 

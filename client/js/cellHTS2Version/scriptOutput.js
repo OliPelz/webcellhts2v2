@@ -51,7 +51,7 @@ function ScriptOutput(userInput) {
 				}
 				else if(type == "userInput") {
 					// if one has defined an alternative using '||'
-					var res = myVar.exec(/(.+)\s*\|\|\s*(.+)$/);
+					var res = myVar.match(/(.+)\s*\|\|\s*(.+)$/);
 
 					var myUserInput = this.userInput[myVar];
 					
