@@ -1,70 +1,56 @@
 'use strict';
 
 
+// setup namespace if not already defined
+if(!de) {
+	var de = {};
+}
+if(!de.dkfz)
+    de.dkfz = {};
+if(!de.dkfz.signaling)
+    de.dkfz.signaling = {};
+if(!de.dkfz.signaling.webcellhts2v2)
+    de.dkfz.signaling.webcellhts2v2 = {};   
+//this is a global variable, defined the right way
+//applying the module pattern
+de.dkfz.signaling.webcellhts2v2.cellHTS2Config = function() {
+	var my = {};
+	my.webcellHTS2v2Version = "0.01";
 
-var myAppModule = angular.module('app', [
-	/*'ngRoute',*/
-	'mgo-angular-wizard',
-	'ui.bootstrap'
-]);
-
-var cellHTS2Config = {};
-
-
-cellHTS2Config.webcellHTS2Version = "2.00";
-
-cellHTS2Config.no_webserver = true; //if true than we dont have any webserver and no R
-                         //basically this is for testing the client and
-                         //generating R scripts
+	my.testing = true; //if true than we dont have any webserver and no R
+                              //basically this is for testing the client and
+                              //generating R scripts and for the jasmine tests
+	my.webserver = "NODE.JS";  //allowed values : NODE.JS or JAVA . NODE.JS = local, singlethreaded R server implementation using node.js and  , JAVA = multithreaded, with a queuing system in background, more powerful webserver  
 
 /* this is for parts where we need the R server */
-cellHTS2Config.serverConnect = {
-    address : "127.0.0.1",
-    webroot : "/",
-	xlsConverterAddress : "/xlsConvert",
-	rQueryAddress : "/runRScript"
-};
+	my.serverConnect = {
+		"NODE.JS" : {
+   	 		address : "127.0.0.1",
+    		webroot : "/",
+			xlsConverterAddress : "/xlsConvert",
+			rQueryAddress : "/runRScript"
+		},
+		"JAVA" : {
+   	 		address : "127.0.0.1",
+    		webroot : "/",
+			xlsConverterAddress : "/xlsConvert",
+			rQueryAddress : "/runRScript"
+		}
+	};
 // generate cellHTS2 scripts for the following version
-cellHTS2Config.dependentCellHTS2Version = "2.16";
-cellHTS2Config.dependentRVersion = "13.1";
+	my.dependentRVersion = "2.13.1";
 
-cellHTS2Config.currentCellHTS2Version = null;
-cellHTS2Config.currentRVersion = null;
+	my.currentCellHTS2Version = null;
+	my.currentRVersion = null;
 
-//the toastr error messages
-toastr.options = {
-	"closeButton": false,
-	"debug": false,
-	"positionClass": "toast-top-right",
-	"onclick": null,
-	"showDuration": "300",
-	"hideDuration": "1000",
-	"timeOut": "5000",
-	"extendedTimeOut": "1000",
-	"showEasing": "swing",
-	"hideEasing": "linear",
-	"showMethod": "fadeIn",
-	"hideMethod": "fadeOut"
-}
+	return my;
+}();
 
 
 
-/*
-*  define a service to be able to share webcellhts2 config data between controllers
-*/
-myAppModule.service('sharedWebCellHTS2Props', function() {
-    var sharedObject = {};
-    var configObject = cellHTS2Config;
-	
-    
-     this.getSharedObject = function() {
-         return sharedObject;
-     }
-     this.getConfigObject = function() {
-	     return configObject;
-     }
-    
-});
+
+
+
 
 
 
