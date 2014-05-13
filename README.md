@@ -10,6 +10,7 @@ new version of webcellhts2 (v2) using more modern client technologies:
 unique features
 * modern design with easy-to-find menubar
 * more modern wizard control with navigation bar
+* input files for cellHTS2 can be generated on-the-fly on every step e.g. Platelist, Plateconfig
 * beautiful dynamic error and warning messages
 * switching stylesheets dynamically
 * heavily relying client side javascript, emphasis on doing most of the webapp clientside

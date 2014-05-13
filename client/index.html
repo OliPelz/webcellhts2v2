@@ -117,7 +117,7 @@
 					Advanced File Importer
 				</a>
 				<input type="file" data-ng-file-select="onDataFileUpload($files)" multiple>
-				<table data-ng-show="stepUploadDF.dataFiles">
+				<table data-ng-show="stepUploadDF.dataFiles.length() > 0">
 					<thead>
 						<tr>Filename</tr>
 						<tr>Channel</tr>
@@ -131,7 +131,8 @@
 						<td data-ng-show="stepStart.isDualChannel">{{myDataFile.replicate}}</td>
 					</tr>
 					</tbody>
-				</table>	
+				</table>
+				<input type="button" data-ng-show="stepUploadDF.dataFiles.length > 0" data-ng-click="generatePlatelist()" value="Generate Platelist file" />	
 				Filename Parsing:
 				<input type="checkbox" data-ng-model="stepUploadDF.filenameParsing">
                 <input type="button" wz-next="logStep()" value="Click here to continue" />
