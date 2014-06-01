@@ -20,6 +20,6 @@ unique features
 * a unique configuration language has been written to easily modify/extend the R-scripts
 * workflows can be generated on the fly in the web browser
 * hight code testing coverage
-
-
+* all cellHTS2 .RDA example files can be loaded as examples
+* preview mode with precalculation on R server to see preview of results e.g. plates
 Read INSTALL.md for information to setting it up and installing it.

@@ -1,3 +1,7 @@
 .Rhistory
 .idea
 .DS_Store
+server/.classpath
+server/.idea
+server/.project
+server/.settings
